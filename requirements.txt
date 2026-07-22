@@ -1,0 +1,18 @@
+# WSL
+# pip install torch==2.5.1 torchvision==0.20.1 --index-url https://download.pytorch.org/whl/cu121
+# pip install unsloth
+
+datasets
+sentencepiece
+protobuf
+huggingface_hub
+ipykernel
+jupyter
+matplotlib
+
+# sudo apt update
+# sudo apt install -y build-essential
+# If training stops due to cache,  rm -rf ~/json-extractor-sft/notebook/unsloth_compiled_cache
+
+#WIndows
+# pip install transformers peft accelerate bitsandbytes sentencepiece protobuf

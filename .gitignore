@@ -1,0 +1,22 @@
+# Python environments
+
+*_env/
+venv/
+.venv/
+__pycache__/
+win_env/
+
+unsloth_compiled_cache/
+outputs/
+
+qwen2.5-3b-sft-out*/
+adapter_model.safetensors
+adapter_model.bin
+
+.ipynb_checkpoints/
+
+.DS_Store
+Thumbs.db
+.vscode/
+
+.env

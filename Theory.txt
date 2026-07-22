@@ -1,0 +1,67 @@
+1. TOKENIZATION
+    - To convert the text into numbers
+    - "I love machine learning" -> ["I", "love", "machine", "learning"]
+
+2. TRANSFORMERS
+    - read "Attention is all you need"
+    - Brain of LLM, it specifies relations between words.
+    - Has a self-attention layer. "The cat sat on the mat because it was tired". Here, "it" refers to "cat"
+
+3. ATTENTION
+    - Most important part of the TRANSFORMERS
+    - Not all woprds are equally important. It is used to find the important words in a sentence.
+    - "Dog chased the ball because it was fast" It: Dog? Ball?
+    - Attention mechanism is used in order to find the importance and relation.
+    - 3 MAJOR COMPONENTS OF ATTENTION: Q,k,v (query, key and value)
+    - attention is the softmax function which is also called the smart focus mechanism
+
+4. Autoregressive Generation
+    - How the model generates text
+    - one token at a time
+    - Eg: sky is __
+          sky is blue
+          sky is blue __
+          sky is blue today.
+    - Future words depends on the previously predicted words.
+
+5. LoRA
+    - LoRA is Low rank Adaptation
+    - A model can have multiple billion parameters. To train all the parameters are impossiblee so we use LoRA
+    - Instead of changing the model's brain, we add the ADAPTER layers-> or ADAPTER matrx which is like adding strict notes to a whole book.
+    - Instead of updating all weights, we freeze the base model and inject small trainable "adapter" matrices into each layer
+    - The adapter matrix only changes the seld- attention layer's Q, k, v values.
+    - Original weights of the model are frozen only the tiny metrics (self-attention layer) is trained for a specific behaviour.
+
+6. QLoRA
+    - Quantized LoRA
+    - It  is a highly efficient AI technique that shrinks LLMs so that they can be fine-tuned on consumer-grade hardware. It works by compressing the original base model's weights to 4-bit precision and adding tiny, trainable "adapter" layers (LoRA) on top.
+    -  Instead of modifying the entire base model, QLoRA injects small, trainable matrices into the model architecture. Only these tiny adapters are updated during training.
+    - LoRA + the frozen base model loaded in 4-bit quantization (NF4).
+
+7. Supervised Fine Tuning
+    - Supervised Fine-Tuning (SFT) is a way of teaching an AI model by showing it examples of the right input and right output.
+    - SFT is the process of improving a pre-trained AI model by training it on examples of correct inputs and desired outputs so it learns how to respond to instructions more effectively.
+    - Large language models are often trained in stages:
+        ~ Pretraining: The model reads huge amounts of text from books, websites, articles, etc. It learns language patterns and general knowledge.
+        ~ Supervised Fine-Tuning (SFT): Humans provide high-quality examples of how the model should respond. The model learns to follow instructions better.
+        ~ Further Alignment (optional): Techniques such as reinforcement learning or preference optimization can be used to make responses more helpful, safe, and aligned with user preferences.
+    - SFT helps the model to follow the instractions more accurately and answer in a detailed style. It improvbes the consistency and reduces unwanted behaviours.
+    - The fine-tuned model better understands what the user wants.
+
+8. LoRA r and LoRA alpha
+- LoRA Rank (r): Controls the size of the adapter matrices — how much the adapter can learn.
+    Let Original matrix W: 4096 × 4096  (16M values)
+    LoRA with r=16:
+    A: 4096 × 16   (65K values)
+    B: 16  × 4096  (65K values)
+- LoRA alpha: Controls the strength of the adapter's updates — how much the adapter influences the final output.
+    Usually, LoRA alpha= 2 * LoRA r
+
+
+Qwen2.5-3B-instruct
+Model basics
+
+- 3.09B parameters, decoder-only transformer (Qwen2.5 architecture — GQA attention, RoPE, SwiGLU)
+- 32K context length 
+- Strong instruction-following and structured-output behavior for its size 
+- Apache 2.0 license (Qwen2.5 base sizes are Apache 2.0; check the specific repo card, but 3B/7B instruct are permissively licensed)
