@@ -83,4 +83,4 @@ Optimizer- adamw_8bit
 ### Note
 Date: July 23, 2026\
 Model overfitting\
-Train loss: 0.003, Validation loss: 242, model is still memorizing the training data
+Train loss: 0.003, Validation loss: 0.222, model is still memorizing the training data
