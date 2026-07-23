@@ -48,9 +48,8 @@ open vscode and connect it to wsl
 Run training.py for SFT
 
 ## 🪟 Moving trained model from WSL to Windows
-rsync -av --exclude='json_env' --exclude='__pycache__' \
-  ~/json-extractor-sft/ "/mnt/d/JSON Extractor - SFT"\
-  This copies everything (dataset, notebook, trained adapter, loss curve) back to the Windows-visible project folder, while skipping the (large, non-portable) Python virtual environment.
+rsync -av --progress --exclude='json_env' --exclude='unsloth_compiled_ca*' ./ "/mnt/d/JSON Extractor - SFT/"\
+This copies everything (dataset, notebook, trained adapter, loss curve) back to the Windows-visible project folder, while skipping the (large, non-portable) Python virtual environment.
 
 ## Windows Inference
 
@@ -68,14 +67,20 @@ python interface_windows.py
 
 ## 🤖 Model Details
 	
-Base model- nsloth/Qwen2.5-3B-Instruct-bnb-4bit\
+Base model- unsloth/Qwen2.5-3B-Instruct-bnb-4bit\
 Method- QLoRA (4-bit NF4 base + LoRA adapters)\
-LoRA rank / alpha- r=16, alpha=32\
+LoRA rank / alpha- r=8, alpha=16\
 Target modules- q_proj, k_proj, v_proj, o_proj, gate_proj, up_proj, down_proj\
 Trainable params-LoRA adapters only (base model frozen)\
-Dataset size- ~1,000 examples, system/user/assistant chat format\
-Train/eval split- 95% / 5%\
-Epochs- 3 (see loss curve notes — may overfit past ~step 50 on this dataset size)\
+Dataset size- ~1,475 examples, system/user/assistant chat format\
+Train/eval split- 80% / 20%\
+Epochs- 3\
+Patience for earlystopping- 5\
 Effective batch size- 16 (batch_size=4 × grad_accum=4)\
-Learning rate- 2e-4\
+Learning rate- 1e-4\
 Optimizer- adamw_8bit
+
+### Note
+Date: July 23, 2026\
+Model overfitting\
+Train loss: 0.003, Validation loss: 242, model is still memorizing the training data
