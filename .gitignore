@@ -1,22 +1,31 @@
 # Python environments
 
+json_env/
 *_env/
 venv/
 .venv/
 __pycache__/
+*.pyc
+*.pyo
 win_env/
 
 unsloth_compiled_cache/
+.locks/
 outputs/
+*.checkpoint
 
 qwen2.5-3b-sft-out*/
 adapter_model.safetensors
-adapter_model.bin
+
+# Hugging Face / dataset caches
+.cache/
+huggingface_hub_cache/
 
 .ipynb_checkpoints/
 
 .DS_Store
 Thumbs.db
 .vscode/
+*.swp
 
 .env
